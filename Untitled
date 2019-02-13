@@ -1,0 +1,49 @@
+
+
+CohomologyRing.doctest_setup()
+
+gap.set('G','SmallGroup(8,5)')
+gap.set('L','ConjugacyClassesSubgroups(G)')
+gap.set('L2','List(L,w->StructureDescription(Representative(w)))')
+
+
+
+gap.set('pos','Positions(L2,"C2 x C2")')
+
+
+gap.set('H','Group(MinimalGeneratingSet(Representative(L2[pos[1]])))')
+phi = gap('GroupHomomorphismByFunction(H,G,x->x)')
+G = phi.Range()
+H = phi.Source()
+H_H = CohomologyRing(H,GroupName="M",prime=2)
+H_H.make()
+print(H_H);
+H_G = CohomologyRing(G,GroupName="G",prime=2)
+H_G.make()
+phi.SetName('"phi"')
+phi_star = H_G.hom(phi,H_H)
+singular(H_H).set_ring()
+singular(phi_star)
+
+
+===================
+
+CohomologyRing.doctest_setup()
+
+gap.set('G','SmallGroup(8,5)')
+gap.set('L','ConjugacyClassesSubgroups(G)')
+gap.set('L2','List(L,w->StructureDescription(Representative(w)))')
+gap.set('pos','Positions(L2,"C2 x C2")')
+gap.set('H','Representative(L[12])')
+phi = gap('GroupHomomorphismByFunction(H,G,x->x)')
+G = phi.Range()
+H = phi.Source()
+H_H = CohomologyRing(H,GroupName="M",prime=2)
+H_H.make()
+print(H_H);
+H_G = CohomologyRing(G,GroupName="G",prime=2)
+H_G.make()
+phi.SetName('"phi"')
+phi_star = H_G.hom(phi,H_H)
+singular(H_H).set_ring()
+singular(phi_star)
